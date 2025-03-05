@@ -1,6 +1,6 @@
 # Cybersecurity Attack Type Prediction App
 
-Cette application permet de prédire le type d'attaque en cybersécurité à partir d'un dataset. Elle est construite avec **Streamlit** et utilise des modèles entraînés pour effectuer des prédictions basées sur les données d'entrée.
+Cette application permet de prédire le type d'attaque à partir d'informations fournis (Timestamp, Destination IP Address, Source Port, Protocol..). Elle est construite avec **Streamlit** et utilise un modèle de prédiction sélectionné, qui a été entraîné sur un dataset de 40000 observations.
 
 ## 🔧 Prérequis
 
@@ -29,10 +29,9 @@ Avant de pouvoir exécuter l'application, assurez-vous d'avoir les logiciels sui
 Ouvrez un terminal et exécutez la commande suivante pour récupérer le projet depuis le dépôt GitHub :
 
 ```bash
-git clone [URL_DU_REPOSITORY]
+git clone https://github.com/nathaa13/CyberSecurity-AttackType-Detection.git
 ```
 
-Remplacez [URL_DU_REPOSITORY] par l'URL du dépôt GitHub où l'application est stockée.
 
 Accédez ensuite au répertoire du projet :
 
@@ -66,8 +65,9 @@ L'application nécessite certains fichiers .pkl pour fonctionner correctement.
 
 Assurez-vous d’avoir les fichiers suivants dans le répertoire du projet (au même niveau que app.py) :
 
-* `model.pkl` (modèle de prédiction)
-* `scaler.pkl` (prétraitement des données, si applicable)
+* `DecisionTree_model.pkl` (modèle de prédiction)
+* `columns_train.pkl` (pour le prétraitement des données)
+* `label_encoder.pkl` (pour le prétraitement des données)
 ⚠️ Si ces fichiers ne sont pas fournis, l'application ne pourra pas effectuer de prédictions.
 
 ---
@@ -89,6 +89,6 @@ L'application permet de prédire le type d'attaque en cybersécurité de deux ma
 * Entrez les informations requises via l'interface utilisateur.
 * Cliquez sur "Prédire" pour obtenir le type d'attaque prédit.
 ### 📂 2️⃣ Prédiction à partir d'un fichier CSV
-* Cliquez sur le bouton "Upload CSV" pour charger un fichier de données.
-* Le fichier doit respecter le format du dataset d'entraînement du modèle.
+* Cliquez sur le bouton "Browse files" pour charger un fichier de données au format CSV.
+* Le fichier doit respecter le format du dataset d'entraînement du modèle. (sans la colonne "Attack Type")
 * L'application affichera les prédictions pour chaque ligne du fichier.
