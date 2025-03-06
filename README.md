@@ -101,6 +101,6 @@ The application allows predicting the type of cybersecurity attack in two ways:
 
 ### 📂 2️⃣ Prediction from a CSV File
 * Click the **"Browse files"** button to upload a CSV file.
-* The file must follow the format of the model's training dataset (**without the "Attack Type" column**).
+* The file must follow the format of the model's training dataset (**without the "Attack Type" column**). Examples of CSV files to provide in testpredict.csv and testpredict-several-lines.csv.
 * The application will display predictions for each row in the file.
 
