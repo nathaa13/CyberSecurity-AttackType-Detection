@@ -10,28 +10,28 @@ from user_agents import parse
 
 
 
-# Charger le modèle et les objets nécessaires pour le prétraitement
+# Load the model and necessary objects for preprocessing
 with open('DecisionTree_model.pkl', 'rb') as f:
     model = pickle.load(f)
 
 with open('label_encoder.pkl', 'rb') as f:
     label_encoder = pickle.load(f)
 
-# Charger les colonnes d'entraînement
+# Load the training columns
 with open("columns_train.pkl", "rb") as f:
     columns_train = pickle.load(f)
 
 
 
 
-# Charger les noms des colonnes pour le fichier brut (avant preprocessing)
-X_raw_columns = pd.read_csv("cybersecurity_attacks.csv").columns.tolist()  # Contient les colonnes brutes
+# Load the column names from the raw file (before preprocessing)
+X_raw_columns = pd.read_csv("cybersecurity_attacks.csv").columns.tolist()  # Certains raw columns
 
-# ------------------- 2️⃣ Interface utilisateur -------------------
+# ------------------- 2️⃣ User Interface -------------------
 st.title("🔍 Cybersecurity Attack Prediction App")
 st.write("Upload a CSV file or manually enter raw data to predict attack types.")
 
-# Option : Upload CSV ou Entrée manuelle
+# Option : Upload CSV ou Manual Entry
 option = st.radio("Choose input method:", ("Upload CSV", "Manual Entry"))
 
 
@@ -48,9 +48,9 @@ def parse_user_agent(user_agent):
     return os_family, os_version, device_family, device_brand, device_model, browser_family
 
 
-# **Fonction de prétraitement**
+# **Preprocessing Function**
 def preprocess_data(df):
-    """ Transforme les données brutes pour correspondre au format de X_train """
+    """ Transforms raw data to match the format of X_train """
 
     df['Firewall Logs'] = df['Firewall Logs'].fillna('No Log')
     df['Proxy Information'] = df['Proxy Information'].fillna('No Proxy')
@@ -86,12 +86,12 @@ def preprocess_data(df):
         'Device Brand', 'Device Model', 'Browser', 'State'])
 
 
-    # Ajouter les colonnes manquantes et réordonner les colonnes pour correspondre à l'entraînement
+    # Add missing columns and reorder them to match the training format 
     for col in columns_train:
         if col not in df_encoded.columns:
-            df_encoded[col] = 0  # Ajouter la colonne manquante avec des 0
+            df_encoded[col] = 0  # Add the missing column with 0
 
-    # S'assurer que l'ordre des colonnes est identique
+    # Ensure the column order is identical
     df_encoded = df_encoded[columns_train]
 
     return df_encoded
@@ -100,30 +100,30 @@ def preprocess_data(df):
 if option == "Upload CSV":
     uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
     if uploaded_file is not None:
-        user_data = pd.read_csv(uploaded_file)  # Chargement brut
+        user_data = pd.read_csv(uploaded_file)  # Raw data loading
         
-        # 🔄 Appliquer le prétraitement
+        # 🔄 Apply prepocessing
         user_data_processed = preprocess_data(user_data)
         
-        # 🎯 Prédictions
+        # 🎯 Predictions
         predictions = model.predict(user_data_processed)
-        predictions = label_encoder.inverse_transform(predictions)  # Convertir en texte
+        predictions = label_encoder.inverse_transform(predictions)  # Convert to text
 
-        # 🔍 Affichage des résultats
+        # 🔍 Display result
         user_data["Predicted Attack Type"] = predictions
         st.write("### 🔍 Predicted Attack Types:")
-        st.write(predictions)  # Affiche uniquement la colonne des prédictions
+        st.write(predictions)  # Display only the prediction column
 
 
-        # ⬇️ Option de téléchargement
+        # ⬇️ Download option
         csv_output = user_data.to_csv(index=False).encode('utf-8')
         st.download_button("Download Predictions", csv_output, "predictions.csv", "text/csv")
 
-# ------------------- 4️⃣ Entrée Manuelle -------------------
+# ------------------- 4️⃣ Manual Entry -------------------
 elif option == "Manual Entry":
     st.write("### Enter raw input values manually:")
 
-    # Créer un dictionnaire pour stocker les entrées utilisateur
+    # Create a dictionary to store user inputs
     manual_input = {}
 
 
@@ -136,24 +136,24 @@ elif option == "Manual Entry":
     X_raw_columns.remove("Attack Type")
 
 
-    # Générer des champs dynamiquement basés sur les colonnes brutes
+    # Generate fields dynamically based on raw columns
     for col in X_raw_columns:
-        if "timestamp" in col.lower():  # Détection de la colonne Timestamp
-            # Utilisation de date_input pour la date et time_input pour l'heure
+        if "timestamp" in col.lower():  # Detect the Timestamp column
+            # Use data_input for the data and time_input for the time
             date_input = st.date_input(f"{col} - Select Date")
             time_input = st.time_input(f"{col} - Select Time")
             
-            # Combiner les valeurs de date et d'heure en un seul objet datetime
+            # Combine date and time values into a single datetime object
             combined_timestamp = datetime.combine(date_input, time_input)
             
-            # Formater le timestamp selon le format souhaité
+            # Format the timestamp according to the desired format
             manual_input[col] = combined_timestamp.strftime("%d/%m/%Y %H:%M:%S")
             
-        elif col in ["Source IP Address", "Destination IP Address","Proxy Information"]:  # Détection des colonnes IP
+        elif col in ["Source IP Address", "Destination IP Address","Proxy Information"]:  # Detect IP address clumns
             ip_value = st.text_input(f"{col} (Format: xxx.xxx.xxx.xxx)", "")
             manual_input[col] = ip_value
             
-            # # Validation et affichage d'un message d'erreur si l'IP est invalide
+            # # Validation an error message display if the IP is invalid
             # if ip_value and not is_valid_ip(ip_value):
             #     st.error("🚨 Invalid IP address format! Please enter a valid IP (e.g., 103.216.15.12).")
                 
@@ -220,16 +220,16 @@ elif option == "Manual Entry":
             manual_input[col] = st.selectbox(f"{col}", options)
 
 
-        else:  # Colonnes numériques
+        else:  # Numerical columns
             manual_input[col] = st.number_input(f"{col}", value=0)
 
-    # **Créer un DataFrame brut**
-    user_input_df = pd.DataFrame([manual_input])  # Correspond à un fichier CSV brut
+    # **Create a raw DataFrame**
+    user_input_df = pd.DataFrame([manual_input])  # Corresponds to a raw CSV file
 
-    # **🔄 Appliquer le prétraitement sur ces données brutes**
+    # **🔄 Apply preprocessing to this raw data**
     user_input_processed = preprocess_data(user_input_df)
 
-    # 🎯 Faire la prédiction
+    # 🎯 Make the prediction
     if st.button("Predict"):
         prediction = model.predict(user_input_processed)
         predicted_attack = label_encoder.inverse_transform(prediction)[0]
