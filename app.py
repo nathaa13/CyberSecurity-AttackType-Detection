@@ -25,11 +25,11 @@ with open("columns_train.pkl", "rb") as f:
 
 
 # Load the column names from the raw file (before preprocessing)
-X_raw_columns = pd.read_csv("cybersecurity_attacks.csv").columns.tolist()  # Certains raw columns
+X_raw_columns = pd.read_csv("cybersecurity_attacks.csv").columns.tolist()
 
-# ------------------- 2️⃣ User Interface -------------------
+# ------------------- User Interface -------------------
 st.title("🔍 Cybersecurity Attack Prediction App")
-st.write("Upload a CSV file or manually enter raw data to predict attack types.")
+st.write("Upload a CSV file or manually enter data to predict attack types.")
 
 # Option : Upload CSV ou Manual Entry
 option = st.radio("Choose input method:", ("Upload CSV", "Manual Entry"))
@@ -48,7 +48,7 @@ def parse_user_agent(user_agent):
     return os_family, os_version, device_family, device_brand, device_model, browser_family
 
 
-# **Preprocessing Function**
+# Preprocessing Function
 def preprocess_data(df):
     """ Transforms raw data to match the format of X_train """
 
@@ -96,30 +96,30 @@ def preprocess_data(df):
 
     return df_encoded
 
-# ------------------- 3️⃣ Upload CSV -------------------
+# ------------------- Upload CSV -------------------
 if option == "Upload CSV":
     uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
     if uploaded_file is not None:
         user_data = pd.read_csv(uploaded_file)  # Raw data loading
         
-        # 🔄 Apply prepocessing
+        # Apply prepocessing
         user_data_processed = preprocess_data(user_data)
         
-        # 🎯 Predictions
+        # Predictions
         predictions = model.predict(user_data_processed)
         predictions = label_encoder.inverse_transform(predictions)  # Convert to text
 
-        # 🔍 Display result
+        # Display result
         user_data["Predicted Attack Type"] = predictions
         st.write("### 🔍 Predicted Attack Types:")
         st.write(predictions)  # Display only the prediction column
 
 
-        # ⬇️ Download option
+        # Download option
         csv_output = user_data.to_csv(index=False).encode('utf-8')
         st.download_button("Download Predictions", csv_output, "predictions.csv", "text/csv")
 
-# ------------------- 4️⃣ Manual Entry -------------------
+# ------------------- Manual Entry -------------------
 elif option == "Manual Entry":
     st.write("### Enter raw input values manually:")
 
@@ -127,10 +127,10 @@ elif option == "Manual Entry":
     manual_input = {}
 
 
-    def is_valid_ip(ip):
-        """ Vérifie si une chaîne est une adresse IP valide. """
-        pattern = r"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$"
-        return re.match(pattern, ip) is not None
+    # def is_valid_ip(ip):
+    #     """ Vérifie si une chaîne est une adresse IP valide. """
+    #     pattern = r"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$"
+    #     return re.match(pattern, ip) is not None
 
 
     X_raw_columns.remove("Attack Type")
@@ -139,7 +139,6 @@ elif option == "Manual Entry":
     # Generate fields dynamically based on raw columns
     for col in X_raw_columns:
         if "timestamp" in col.lower():  # Detect the Timestamp column
-            # Use data_input for the data and time_input for the time
             date_input = st.date_input(f"{col} - Select Date")
             time_input = st.time_input(f"{col} - Select Time")
             
@@ -223,13 +222,13 @@ elif option == "Manual Entry":
         else:  # Numerical columns
             manual_input[col] = st.number_input(f"{col}", value=0)
 
-    # **Create a raw DataFrame**
-    user_input_df = pd.DataFrame([manual_input])  # Corresponds to a raw CSV file
+    # Create a raw DataFrame
+    user_input_df = pd.DataFrame([manual_input])  
 
-    # **🔄 Apply preprocessing to this raw data**
+    # Apply preprocessing to this raw data
     user_input_processed = preprocess_data(user_input_df)
 
-    # 🎯 Make the prediction
+    # Make the prediction
     if st.button("Predict"):
         prediction = model.predict(user_input_processed)
         predicted_attack = label_encoder.inverse_transform(prediction)[0]
