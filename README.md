@@ -84,7 +84,7 @@ Make sure you have the following files in the project directory (at the same lev
 Once all dependencies are installed and the .pkl files are in place, run the following command to start the application:
 
 ```bash
-streamlit run app.py
+python app.py
 ```
 
 This will automatically open the application in your default browser.
