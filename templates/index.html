@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberVault</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="home">
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About Me</a>
+        <a href="/contact">Contact</a>
+        <a href="/login">Login</a>
+    </nav>
+    <video autoplay loop muted playsinline class="bg-video">
+        <source src="{{ url_for('static', filename='JJ.mp4') }}" type="video/mp4">
+        Votre navigateur ne supporte pas la lecture de vidéos.
+    </video> 
+</body>
+</html>

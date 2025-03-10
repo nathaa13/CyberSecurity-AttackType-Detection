@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Permet un rendu responsive sur mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Dashboard - CyberVault</title>
+
+  <!-- Votre fichier CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body class="dashboard">
+
+  <!-- Barre de navigation -->
+  <nav>
+    <a href="/">Home</a>
+    <a href="/about">About Me</a>
+    <a href="/contact">Contact</a>
+    {% if 'user' in session %}
+      <a href="/logout">Logout</a>
+    {% else %}
+      <a href="/login">Login</a>
+    {% endif %}
+  </nav>
+
+  <!-- Titre de la page -->
+  <h1>🔒 Welcome to the CyberVault Dashboard</h1>
+
+  <!-- Conteneur principal qui va aligner CSV et Saisie Manuelle -->
+  <div class="dashboard-container">
+
+    <!-- Bloc : Upload CSV -->
+    <div class="csv-upload">
+      <h2>Upload a CSV file</h2>
+      <form action="/predict_csv" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".csv" required>
+        <button type="submit">Predict from CSV</button>
+      </form>
+    </div>
+    
+    <!-- Bloc : Saisie manuelle -->
+    <div class="manual-entry">
+      <h2>Manual Data Entry</h2>
+      <form action="/predict_manual" method="post">
+        
+        <!-- Timestamps (Date & Heure) -->
+        <label for="Timestamp">Timestamp:</label>
+        <input type="date" name="Timestamp_date" required>
+        <input type="time" name="Timestamp_time" required><br>
+
+        <!-- Adresses IP -->
+        <label for="Source_IP">Source IP Address:</label>
+        <input type="text" name="Source IP Address" placeholder="192.168.1.1" required><br>
+
+        <label for="Destination_IP">Destination IP Address:</label>
+        <input type="text" name="Destination IP Address" placeholder="192.168.1.2" required><br>
+
+        <!-- Protocoles -->
+        <label for="Protocol">Protocol:</label>
+        <select name="Protocol">
+          <option value="TCP">TCP</option>
+          <option value="UDP">UDP</option>
+          <option value="ICMP">ICMP</option>
+        </select><br>
+
+        <!-- Types de Paquets -->
+        <label for="Packet_Type">Packet Type:</label>
+        <select name="Packet Type">
+          <option value="Data">Data</option>
+          <option value="Control">Control</option>
+        </select><br>
+
+        <!-- Type de Trafic -->
+        <label for="Traffic_Type">Traffic Type:</label>
+        <select name="Traffic Type">
+          <option value="HTTP">HTTP</option>
+          <option value="DNS">DNS</option>
+          <option value="FTP">FTP</option>
+        </select><br>
+
+        <!-- Indicateurs de Malware -->
+        <label for="Malware_Indicators">Malware Indicators:</label>
+        <select name="Malware Indicators">
+          <option value="IoC Detected">IoC Detected</option>
+          <option value="No IoC Detected">No IoC Detected</option>
+        </select><br>
+
+        <!-- Alertes -->
+        <label for="Alerts_Warnings">Alerts/Warnings:</label>
+        <select name="Alerts/Warnings">
+          <option value="Alert Triggered">Alert Triggered</option>
+          <option value="No Alert Triggered">No Alert Triggered</option>
+        </select><br>
+
+        <!-- Signatures d'Attaque -->
+        <label for="Attack_Signature">Attack Signature:</label>
+        <select name="Attack Signature">
+          <option value="Known Pattern A">Known Pattern A</option>
+          <option value="Known Pattern B">Known Pattern B</option>
+        </select><br>
+
+        <!-- Actions Prises -->
+        <label for="Action_Taken">Action Taken:</label>
+        <select name="Action Taken">
+          <option value="Logged">Logged</option>
+          <option value="Blocked">Blocked</option>
+          <option value="Ignored">Ignored</option>
+        </select><br>
+
+        <!-- Niveau de Sévérité -->
+        <label for="Severity_Level">Severity Level:</label>
+        <select name="Severity Level">
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select><br>
+
+        <!-- Segment Réseau -->
+        <label for="Network_Segment">Network Segment:</label>
+        <select name="Network Segment">
+          <option value="Segment A">Segment A</option>
+          <option value="Segment B">Segment B</option>
+          <option value="Segment C">Segment C</option>
+        </select><br>
+
+        <!-- Logs de Pare-feu -->
+        <label for="Firewall_Logs">Firewall Logs:</label>
+        <select name="Firewall Logs">
+          <option value="Log Data">Log Data</option>
+          <option value="No Log Data">No Log Data</option>
+        </select><br>
+
+        <!-- Alertes IDS/IPS -->
+        <label for="IDS_IPS_Alerts">IDS/IPS Alerts:</label>
+        <select name="IDS/IPS Alerts">
+          <option value="Alert Data">Alert Data</option>
+          <option value="No Alert Data">No Alert Data</option>
+        </select><br>
+
+        <!-- Source du Log -->
+        <label for="Log_Source">Log Source:</label>
+        <select name="Log Source">
+          <option value="Server">Server</option>
+          <option value="Firewall">Firewall</option>
+        </select><br>
+
+        <button type="submit">Predict Manually</button>
+      </form>
+    </div>
+  </div> <!-- Fin de .dashboard-container -->
+
+  <!-- Affichage des prédictions -->
+  {% if prediction %}
+  <div class="predictions-section">
+      <h2>🛡️ Manual Entry Prediction:</h2>
+      <p><strong>Attack Type:</strong> {{ prediction }}</p>
+      
+      <h3>Definition:</h3>
+      <p>{{ attack_definition }}</p>
+
+      {% if attack_video %}
+      <h3>Learn More:</h3>
+      <iframe width="560" height="315" src="{{ attack_video }}" frameborder="0" allowfullscreen></iframe>
+      {% endif %}
+  </div>
+{% endif %}
+
+{% if attack_results %}
+    <div class="predictions-section">
+        <h2>🛡️ Predictions from CSV:</h2>
+        <ul>
+            {% for result in attack_results %}
+                <li>
+                    <strong>Attack Type:</strong> {{ result.attack }}<br>
+                    <strong>Definition:</strong> {{ result.definition }}<br>
+                    {% if result.video_url %}
+                        <iframe width="560" height="315" src="{{ result.video_url }}" frameborder="0" allowfullscreen></iframe>
+                    {% endif %}
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
+  <!-- Vidéo de fond optionnelle -->
+  <video autoplay loop muted playsinline class="bg-video">
+    <source src="{{ url_for('static', filename='FN.mp4') }}" type="video/mp4">
+    Votre navigateur ne supporte pas la lecture de vidéos.
+  </video>
+
+</body>
+</html>

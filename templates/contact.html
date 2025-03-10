@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="contact">
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About Me</a>
+        <a href="/contact" class="active">Contact</a>
+        <a href="/login" class="active">Login</a>
+    </nav>
+<video autoplay loop muted playsinline class="bg-video">
+    <source src="{{ url_for('static', filename='FN.mp4') }}" type="video/mp4">
+    Votre navigateur ne supporte pas la lecture de vidéos.
+</video>
+
+    <div class="contact-container">
+        <!-- ✅ Partie Informations -->
+        <div class="contact-info">
+            <h2 class="section-title">Get In Touch With Us Now!</h2>
+            <div class="info-grid">
+                <div class="info-box">
+                    <h3>📞 Phone Number</h3>
+                    <p>+33 134567654</p>
+                </div>
+                <div class="info-box">
+                    <h3>📧 Email</h3>
+                    <p>info@cybervault.com</p>
+                    <p>sales@cybervault.com</p>
+                </div>
+                <div class="info-box">
+                    <h3>📍 Location</h3>
+                    <p>5th Floor, Titi Palacio, Cyber City, Paris, FRANCE</p>
+                </div>
+                <div class="info-box">
+                    <h3>⏰ Working Hours</h3>
+                    <p>Monday - Saturday</p>
+                    <p>9:00 AM - 6:00 PM</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ✅ Partie Formulaire -->
+        <div class="contact-form">
+            <h2 class="section-title">Contact Us</h2>
+            <form action="#" method="post">
+                <div class="input-group">
+                    <input type="text" name="first_name" placeholder="First Name *" required>
+                    <input type="text" name="last_name" placeholder="Last Name *">
+                </div>
+                <div class="input-group">
+                    <input type="tel" name="mobile" placeholder="Mobile No *" required>
+                    <input type="email" name="email" placeholder="Email ID *" required>
+                </div>
+                <textarea name="message" placeholder="Message"></textarea>
+
+                <button type="submit">Submit ✈️</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
