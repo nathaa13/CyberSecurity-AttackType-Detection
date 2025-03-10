@@ -1,0 +1,648 @@
+/* ✅ Style général */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    text-align: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ✅ About, Contact et Login : Appliquer un fond bleu */
+body.about, 
+body.contact, 
+body.login {
+    background: none !important;
+    background-color: #03445a !important;
+}
+
+/* ✅ Container pour About */
+.about-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    max-width: 900px;
+    margin: auto;
+    padding: 40px;
+}
+
+/* ✅ Style de l’image */
+.about-image {
+    width: 250px;
+    border-radius: 10px;
+}
+
+/* ✅ Style du texte */
+.about-text {
+    max-width: 500px;
+    text-align: left;
+    background-color: rgba(173, 216, 230, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* ✅ Liste propre */
+.about-text ul {
+    list-style: none;
+    padding: 0;
+}
+
+.about-text li {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* ✅ Barre de navigation */
+nav {
+    position: absolute;
+    top: 20px;
+    right: 50px;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    margin: 0 15px;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    text-decoration: none;
+}
+
+/* ✅ Style du titre */
+h1 {
+    font-size: 80px;
+    margin-top: -50px;
+    letter-spacing: 3px;
+}
+
+/* ✅ Ajustement pour les petits écrans */
+@media screen and (max-width: 768px) {
+    .about-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-text {
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 50px;
+    }
+
+    nav {
+        top: 10px;
+        right: 20px;
+    }
+
+    nav a {
+        font-size: 16px;
+        margin: 0 8px;
+    }
+}
+/* ✅ Fixer le menu en haut */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(173, 216, 230, 0.9);
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+    margin: 0 15px;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ✅ Container pour About */
+.about-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    max-width: 900px;
+    margin: auto;
+    padding: 120px 40px 40px; /* On ajoute plus d’espace en haut */
+}
+
+/* ✅ Style de l’image */
+.about-image {
+    width: 300px;
+    border-radius: 10px;
+}
+
+/* ✅ Style du texte */
+.about-text {
+    max-width: 500px;
+    text-align: left;
+    background-color: rgba(173, 216, 230, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* ✅ Liste propre */
+.about-text ul {
+    list-style: none;
+    padding: 0;
+}
+
+.about-text li {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* ✅ Fixer et bien aligner le menu */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(173, 216, 230, 0.9);
+    padding: 10px 0;
+    text-align: center;
+    z-index: 1000; /* Assure que le menu reste au-dessus */
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+    margin: 0 15px;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ✅ Ajustement pour les petits écrans */
+@media screen and (max-width: 768px) {
+    .about-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-text {
+        text-align: center;
+    }
+
+    .about-image {
+        width: 250px;
+    }
+
+    nav a {
+        font-size: 12px;
+        margin: 0 5px;
+    }
+}
+
+.about-description {
+    margin-top: 80px; /* Ajuste la valeur pour descendre plus */
+}
+/* ✅ Appliquer le fond d'écran spécifique à la page About */
+body.about {
+    background: url('/static/about.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+/* ✅ Conteneur super compact */
+.contact-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 600px; /* Encore plus petit */
+    margin: 50px auto;
+    padding: 15px;
+    gap: 10px; /* Réduction de l'espace */
+}
+
+/* ✅ Section des informations encore réduite */
+.contact-info {
+    flex: 1;
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: left;
+    color: black;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    width: 40%; /* Encore plus compact */
+    font-size: 14px;
+}
+
+/* ✅ Formulaire encore plus petit */
+.contact-form {
+    flex: 1;
+    background: #fff;
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 40%; /* Réduction */
+    font-size: 14px;
+}
+
+/* ✅ Ajustement des champs plus petits */
+.input-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    width: 100%;
+}
+
+.input-group input {
+    width: 48%;
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+/* ✅ Champ message encore plus compact */
+.contact-form textarea {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+    font-size: 12px;
+}
+
+/* ✅ Correction du captcha */
+.captcha {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0;
+    width: 100%;
+}
+
+.captcha input {
+    width: 80px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 10px;
+}
+
+/* ✅ Bouton plus petit */
+button {
+    width: 100%;
+    padding: 6px;
+    background: #03445a;
+    color: white;
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #02394a;
+}
+
+/* ✅ Adaptation mobile super compacte */
+@media (max-width: 700px) {
+    .contact-container {
+        flex-direction: column;
+        text-align: center;
+        max-width: 90%;
+    }
+    .contact-info, .contact-form {
+        width: 100%;
+    }
+    .input-group {
+        flex-direction: column;
+    }
+    .input-group input {
+        width: 100%;
+    }
+}
+/* ✅ Ajustement Contact : Équilibrage des colonnes */
+.contact-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 900px; /* Ajustement pour équilibre */
+    margin: 120px auto 50px; /* Espacement du haut pour éviter le chevauchement */
+    padding: 20px;
+    gap: 30px;
+}
+
+/* ✅ Ajustement de la section Infos */
+.contact-info {
+    flex: 1;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 48%; /* Équilibrage */
+}
+
+/* ✅ Titre Infos */
+.contact-info h2 {
+    background: #02394a;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+/* ✅ Grille 2x2 pour les Infos */
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.info-box {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.info-box h3 {
+    color: #02394a;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+/* ✅ Ajustement du Formulaire */
+.contact-form {
+    flex: 1;
+    background: #eeeeee;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 48%;
+}
+
+/* ✅ Titre Formulaire */
+.contact-form h2 {
+    background: #02394a;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+/* ✅ Champs Formulaire */
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.input-group input {
+    width: 48%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    font-size: 14px;
+}
+
+/* ✅ Captcha */
+.captcha {
+    margin: 15px 0;
+}
+
+.captcha input {
+    width: 120px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.captcha-text {
+    font-size: 12px;
+    color: gray;
+}
+
+/* ✅ Bouton Submit */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #02394a;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #001d3b;
+}
+
+/* ✅ Responsive */
+@media (max-width: 900px) {
+    .contact-container {
+        flex-direction: column;
+        text-align: center;
+        max-width: 90%;
+    }
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    .input-group {
+        flex-direction: column;
+    }
+    .input-group input {
+        width: 100%;
+    }
+}
+/* ✅ Fond vidéo pour la page login */
+body.login {
+    position: relative;
+    background: none;
+    overflow: hidden;
+}
+
+/* ✅ Style de la vidéo */
+.bg-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* Derrière le contenu */
+}
+/********************************
+ *  1) Arrière-plan + global
+ ********************************/
+ body.dashboard {
+    /* Fond wave (adapter le chemin si besoin) */
+    background: url('/static/image.png') center center / cover no-repeat;
+    /* Pas “fixed” si vous constatez un rognage sur petits écrans. 
+       => On peut enlever “fixed” pour que l’image suive le scroll. 
+       Si vous la voulez fixe, gardez “fixed”. 
+    */
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    /* Laisser le scroll normal pour éviter de couper l’affichage */
+    overflow: visible; 
+    /* Laisser un peu d’espace pour le menu fixe */
+    padding-top: 70px; 
+  }
+  body.dashboard {
+    height: auto !important;
+    display: block !important;
+    flex-direction: initial !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+}
+
+  /********************************
+   *  3) Conteneur principal
+   ********************************/
+  .dashboard-container {
+    /* Flexbox horizontal : CSV à gauche, Manuel à droite */
+    display: flex;
+    justify-content: space-around;  /* ou space-evenly, center, etc. */
+    align-items: flex-start;
+    /* Centrer et limiter la largeur max */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    /* S’il reste des marges à gauche/droite trop fortes, ajustez ici. */
+    gap: 20px;
+  }
+  
+  /********************************
+   *  4) Blocs CSV & Manual
+   ********************************/
+  .csv-upload,
+  .manual-entry {
+    background-color: rgba(0,0,0,0.7);  /* fond sombre */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    padding: 20px;
+    
+    /* Largeur flexible, ~40% chacun si la place le permet */
+    flex: 1 1 40%;
+    min-width: 300px; 
+    max-width: 600px;
+  }
+  
+  /********************************
+   *  5) Style des formulaires
+   ********************************/
+  .csv-upload form,
+  .manual-entry form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  .csv-upload form label,
+  .manual-entry form label {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .csv-upload form input,
+  .csv-upload form select,
+  .manual-entry form input,
+  .manual-entry form select {
+    margin: 5px 0 15px;
+    padding: 8px;
+    border-radius: 4px;
+    border: none;
+    max-width: 100%;
+  }
+  
+  /********************************
+   *  6) Boutons
+   ********************************/
+  button {
+    background-color: #02394a;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #002f3d;
+  }
+  
+  /********************************
+   *  7) Bloc prédictions
+   ********************************/
+  .predictions-section {
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: rgba(0,0,0,0.5);
+    padding: 20px;
+    border-radius: 8px;
+    /* Facultatif si vous voulez du scroll horizontal */
+    overflow-x: auto; 
+  }
+  
+  /********************************
+   *  8) Responsivité
+   ********************************/
+  @media (max-width: 900px) {
+    .dashboard-container {
+      flex-direction: column;  /* Empile CSV et Manuel verticalement */
+      align-items: center;
+    }
+    .csv-upload,
+    .manual-entry {
+      flex: 1 1 auto;
+      max-width: 90%;
+      margin-bottom: 20px;
+    }
+  }
+  /* Sur la page dashboard, réduire la taille du <h1> */
+body.dashboard h1 {
+    font-size: 35px;    /* ajustez la taille selon vos préférences */
+    margin-top: 0;      /* si vous voulez éviter l'espace au-dessus */
+    letter-spacing: normal; /* si vous voulez retirer l'espacement des lettres */
+}
