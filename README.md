@@ -1,6 +1,6 @@
 # Cybersecurity Attack Type Prediction App
 
-This application predicts the type of attack based on provided information (Timestamp, Destination IP Address, Source Port, Protocol, etc.). It is built with **Streamlit** and uses a selected prediction model trained on a dataset of 40,000 observations.
+This application predicts the type of attack based on provided information (Timestamp, Destination IP Address, Source Port, Protocol, etc.). It is built with **Flask** and uses a selected prediction model trained on a dataset of 40,000 observations.
 
 
 ## 🔧 Prerequisites
@@ -92,6 +92,8 @@ This will automatically open the application in your default browser.
 ---
 
 ## 🎯 How to Use the Application
+
+Go to the "Login" page and enter "ANASKA" as the username and "cyberA24" as the password
 
 The application allows predicting the type of cybersecurity attack in two ways:
 
