@@ -36,7 +36,7 @@ git clone https://github.com/nathaa13/CyberSecurity-AttackType-Detection.git
 Then, navigate to the project directory:
 
 ```bash
-cd project_name
+cd CyberSecurity-AttackType-Detection
 ```
 
 ### 2️⃣ Create a virtual environment with `venv`
