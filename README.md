@@ -87,7 +87,7 @@ Once all dependencies are installed and the .pkl files are in place, run the fol
 python app.py
 ```
 
-This will automatically open the application in your default browser.
+This will automatically open the application in your default browser. If not, copy and paste the URL displayed in your browser.
 
 ---
 
