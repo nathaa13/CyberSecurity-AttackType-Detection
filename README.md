@@ -106,5 +106,5 @@ The application allows predicting the type of cybersecurity attack in two ways:
 * The file must follow the format of the original cybersecurity_attacks dataset (**without the "Attack Type" column**). Examples of CSV files to provide in testpredict.csv and testpredict-several-lines.csv.
 * The application will display predictions for each row in the file.
 
-The result will be displayed at the bottom of the page!
+The result will be displayed at the bottom of the page.
 
